@@ -50,7 +50,7 @@ Mokoko_Adventure/Binaries/*
 Plugins/*/Binaries/*
 
 # Builds
-Build/*
+Mokoko_Adventure/Build/*
 
 # Whitelist PakBlacklist-<BuildConfiguration>.txt files
 !Build/*/
