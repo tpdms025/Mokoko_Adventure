@@ -11,6 +11,7 @@ AMATitlePlayerController::AMATitlePlayerController()
 	{
 		TitleWidgetClass = UI_TITLE_C.Class;
 	}
+
 }
 
 void AMATitlePlayerController::ChangeInputMode(bool bGameMode)
@@ -40,6 +41,8 @@ void AMATitlePlayerController::BeginPlay()
 	TitleWidget = CreateWidget<UMATitleWidget>(this, TitleWidgetClass);
 	TitleWidget->AddToViewport();
 	TitleWidget->SetPlayerController(this);
+
+
 }
 
 #pragma region Testing

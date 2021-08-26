@@ -13,5 +13,21 @@ UCLASS()
 class MOKOKO_ADVENTURE_API AMAPlayerController : public APlayerController
 {
 	GENERATED_BODY()
+
+public:
+	AMAPlayerController();
+
+protected:
+	virtual void BeginPlay() override;
+
+	virtual void SetupInputComponent() override;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = UI)
+	TSubclassOf<class UMAIntroWidget> IntroWidgetClass;
+
+private:
+	UPROPERTY()
+	class UMAIntroWidget* IntroWidget;
 	
+	void OnSpaceEvent();
 };

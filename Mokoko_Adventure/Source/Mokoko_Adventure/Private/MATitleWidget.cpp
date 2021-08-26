@@ -32,6 +32,7 @@ void UMATitleWidget::OnGameStartClicked()
 
 void UMATitleWidget::OnExitClicked()
 {
+	TitlePlayerController->ConsoleCommand("quit");
 }
 
 #pragma region Testing
