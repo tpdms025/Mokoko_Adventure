@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "CoreMinimal.h"
+#include "Mokoko_Adventure/Mokoko_Adventure.h"
 #include "Blueprint/UserWidget.h"
 #include "MAIntroWidget.generated.h"
 
@@ -27,16 +27,29 @@ protected:
 	class UTextBlock* TimeCount;
 
 public:
+	void BindPlayerController(class AMAPlayerController* PC);
+
+protected:
 	void OnSpaceBarEvent();
 
 	void OnStartIntro();
 
 private:
+	TWeakObjectPtr<class AMAPlayerController> playerController;
+
 	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta = (AllowPrivateAccess = "true"), Category = UI)
 	float time;
 
 	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta = (AllowPrivateAccess = "true"), Category = UI)
-	float spaceCount;
+	float spacePower;
+
+	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta = (AllowPrivateAccess = "true"), Category = UI)
+	int spaceTotalCount;
+
+	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta = (AllowPrivateAccess = "true"), Category = UI)
+	float decreasingPower;
+
+	float curSpaceCount;
 
 	bool startIntro;
 };

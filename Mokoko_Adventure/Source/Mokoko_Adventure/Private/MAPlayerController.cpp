@@ -19,6 +19,7 @@ void AMAPlayerController::BeginPlay()
 
 	IntroWidget = CreateWidget<UMAIntroWidget>(this, IntroWidgetClass);
 	IntroWidget->AddToViewport();
+	IntroWidget->BindPlayerController(this);
 }
 
 void AMAPlayerController::SetupInputComponent()
@@ -30,5 +31,5 @@ void AMAPlayerController::SetupInputComponent()
 
 void AMAPlayerController::OnSpaceEvent()
 {
-	//IntroWidget->OnSpaceBarEvent();
+	OnSpaceBarPressedEvent.Broadcast();
 }

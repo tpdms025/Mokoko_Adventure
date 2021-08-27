@@ -6,6 +6,7 @@
 #include "GameFramework/PlayerController.h"
 #include "MAPlayerController.generated.h"
 
+DECLARE_MULTICAST_DELEGATE(FOnSpaceBarPressedEventDelegate);
 /**
  * 
  */
@@ -30,4 +31,7 @@ private:
 	class UMAIntroWidget* IntroWidget;
 	
 	void OnSpaceEvent();
+
+public:
+	FOnSpaceBarPressedEventDelegate OnSpaceBarPressedEvent;
 };
