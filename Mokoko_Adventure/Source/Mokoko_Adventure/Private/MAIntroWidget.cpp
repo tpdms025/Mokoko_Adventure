@@ -4,6 +4,7 @@
 #include "MAIntroWidget.h"
 #include "Components/ProgressBar.h"
 #include "Components/TextBlock.h"
+#include "Animation/WidgetAnimation.h"
 #include "MAPlayerController.h"
 
 void UMAIntroWidget::NativeConstruct()
@@ -14,7 +15,8 @@ void UMAIntroWidget::NativeConstruct()
 
 	TimeCount = Cast<UTextBlock>(GetWidgetFromName(TEXT("TB_TimeCount")));
 
-	startIntro = true;
+	startIntro = false;
+	isEventEnded = false;
 	curSpaceCount = 0;
 }
 
@@ -27,6 +29,9 @@ void UMAIntroWidget::NativeTick(const FGeometry& MyGeometry, float InDeltaTime)
 		if (curSpaceCount >= spaceTotalCount)
 		{
 			ProgressBar->SetIsMarquee(true);
+			startIntro = false;
+			isEventEnded = true;
+			PlayAnimation(FadeOut);
 		}
 		else
 		{
@@ -43,12 +48,14 @@ void UMAIntroWidget::NativeTick(const FGeometry& MyGeometry, float InDeltaTime)
 			time -= InDeltaTime;
 		}
 	}
+
 }
 
 void UMAIntroWidget::BindPlayerController(AMAPlayerController* PC)
 {
 	playerController = PC;
 	PC->OnSpaceBarPressedEvent.AddUObject(this, &UMAIntroWidget::OnSpaceBarEvent);
+	PC->OnTestPressedEvent.AddUObject(this, &UMAIntroWidget::OnStartIntro);
 }
 
 void UMAIntroWidget::OnSpaceBarEvent()

@@ -52,4 +52,9 @@ private:
 	float curSpaceCount;
 
 	bool startIntro;
+	bool isEventEnded;
+
+private:
+	UPROPERTY(Meta = (BindWidgetAnim), Meta = (AllowPrivateAccess = "true"), Transient)
+	class UWidgetAnimation* FadeOut;
 };

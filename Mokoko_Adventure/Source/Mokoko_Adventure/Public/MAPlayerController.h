@@ -7,6 +7,10 @@
 #include "MAPlayerController.generated.h"
 
 DECLARE_MULTICAST_DELEGATE(FOnSpaceBarPressedEventDelegate);
+
+#pragma region test
+DECLARE_MULTICAST_DELEGATE(FOnTestEventDelegate);
+#pragma endregion
 /**
  * 
  */
@@ -26,12 +30,25 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = UI)
 	TSubclassOf<class UMAIntroWidget> IntroWidgetClass;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = UI)
+	TSubclassOf<class UMAPlayTipWidget> PlayTipWidgetClass;
+
+
 private:
 	UPROPERTY()
 	class UMAIntroWidget* IntroWidget;
+
+	UPROPERTY()
+	class UMAPlayTipWidget* PlayTipWidget;
 	
 	void OnSpaceEvent();
-
 public:
 	FOnSpaceBarPressedEventDelegate OnSpaceBarPressedEvent;
+
+#pragma region test
+private:
+	void OnTestEvent();
+public:
+	FOnTestEventDelegate OnTestPressedEvent;
+#pragma endregion
 };
