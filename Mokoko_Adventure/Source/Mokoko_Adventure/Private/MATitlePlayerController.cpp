@@ -36,7 +36,7 @@ void AMATitlePlayerController::BeginPlay()
 {
 	Super::BeginPlay();
 
-	ChangeInputMode(true);
+	ChangeInputMode(false);
 
 	TitleWidget = CreateWidget<UMATitleWidget>(this, TitleWidgetClass);
 	TitleWidget->AddToViewport();
