@@ -25,7 +25,7 @@ void UMATitleWidget::NativeConstruct()
 void UMATitleWidget::OnGameStartClicked()
 {
 #pragma region Testing
-	TitlePlayerController->OnChangeMode();
+	//TitlePlayerController->OnChangeMode();
 	MALOG(Warning, TEXT("curGameMode = %d"), TitlePlayerController->curGameMode);
 #pragma endregion
 }
