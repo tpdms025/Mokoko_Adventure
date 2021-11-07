@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
+#include "Mokoko_Adventure/Mokoko_Adventure.h"
 #include "MAAnimInstance.h"
 #include "GameFramework/Character.h"
 #include "GameFramework/PawnMovementComponent.h"
@@ -24,7 +25,9 @@ void UMAAnimInstance::NativeUpdateAnimation(float deltaSecond)
 		{
 			isInAir = character->GetMovementComponent()->IsFalling();
 			directionReady = character->directionReady;
-			angle = CalculateDirection(character->directionReady, character->GetActorRotation());
+
+			//angle = CalculateDirection(FVector::RightVector, directionReady.Rotation());
+			angle = CalculateDirection(FRotationMatrix(character->GetControlRotation()).GetUnitAxis(EAxis::X), directionReady.Rotation());
 			//CalculateDirection
 		}
 	}

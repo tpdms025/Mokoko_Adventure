@@ -104,15 +104,15 @@ void AMACharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 	PlayerInputComponent->BindAxis(TEXT("LookUp"), this, &AMACharacter::LookUp);
 	PlayerInputComponent->BindAxis(TEXT("Turn"), this, &AMACharacter::Turn);
 	
-	PlayerInputComponent->BindAction(TEXT("Jump"), EInputEvent::IE_Pressed,this, &AMACharacter::Jump);
+	PlayerInputComponent->BindAction(TEXT("Jump"), EInputEvent::IE_Pressed,this, &AMACharacter::Jump2);
 }
 
 void AMACharacter::UpDown(float newAxisValue)
 {
+		directionToRotate.Y = newAxisValue;
 	if (GetMovementComponent()->IsFalling())
 	{
 		AddMovementInput(FRotationMatrix(GetControlRotation()).GetUnitAxis(EAxis::X), newAxisValue);
-		directionToRotate.Y = newAxisValue;
 	}
 	else
 	{
@@ -122,11 +122,11 @@ void AMACharacter::UpDown(float newAxisValue)
 
 void AMACharacter::LeftRight(float newAxisValue)
 {
+		directionToRotate.X = newAxisValue;
 	if (GetMovementComponent()->IsFalling())
 	{
 		//AddMovementInput(GetActorRightVector(), newAxisValue);
 		AddMovementInput(FRotationMatrix(GetControlRotation()).GetUnitAxis(EAxis::Y), newAxisValue);
-		directionToRotate.X = newAxisValue;
 	}
 	else
 	{
@@ -145,8 +145,11 @@ void AMACharacter::Turn(float newAxisValue)
 	AddControllerYawInput(newAxisValue);
 }
 
-//void AMACharacter::Jump()
-//{
-//
-//}
+void AMACharacter::Jump2()
+{
+	if (directionReady.SizeSquared() > 0.0f)
+	{
+		Jump();
+	}
+}
 

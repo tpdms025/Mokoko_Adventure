@@ -47,8 +47,8 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	/*UFUNCTION()
-	void Jump();*/
+	UFUNCTION()
+	void Jump2();
 
 private:
 	void UpDown(float newAxisValue);
