@@ -33,6 +33,7 @@ protected:
 #pragma region Testing
 public:
 	void SetPlayerController(class AMATitlePlayerController* MAPC);
+
 private:
 	UPROPERTY()
 	class AMATitlePlayerController* TitlePlayerController;

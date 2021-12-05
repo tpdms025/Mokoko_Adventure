@@ -33,12 +33,20 @@ private:
 	FInputModeGameOnly GameInputMode;
 	FInputModeUIOnly UIInputMode;
 
+	UPROPERTY(EditAnywhere)
+	class ULevelSequence* SequenceAsset;
+
+	UPROPERTY()
+	class ALevelSequenceActor* SequenceActor;
+
+
 #pragma region Testing
 
 protected:
 	virtual void SetupInputComponent() override;
 private:
 public:
+	void PlayLevelSequence();
 	bool curGameMode;
 	void OnChangeMode();
 

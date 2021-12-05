@@ -3,6 +3,10 @@
 
 #include "MATitlePlayerController.h"
 #include "MATitleWidget.h"
+#include "UObject/Object.h"
+#include "LevelSequence.h"
+#include "LevelSequencePlayer.h"
+#include "LevelSequenceActor.h"
 
 AMATitlePlayerController::AMATitlePlayerController()
 {
@@ -12,6 +16,11 @@ AMATitlePlayerController::AMATitlePlayerController()
 		TitleWidgetClass = UI_TITLE_C.Class;
 	}
 
+	static ConstructorHelpers::FObjectFinder<ULevelSequence> LS_GAMESTART(TEXT("/Game/MokokoResource/Arctic/Cinematics/TitleShort_1.TitleShort_1"));
+	if (LS_GAMESTART.Succeeded())
+	{
+		SequenceAsset = LS_GAMESTART.Object;
+	}
 }
 
 void AMATitlePlayerController::ChangeInputMode(bool bGameMode)
@@ -56,6 +65,26 @@ void AMATitlePlayerController::SetupInputComponent()
 void AMATitlePlayerController::OnChangeMode()
 {
 	ChangeInputMode(!curGameMode);
+	PlayLevelSequence();
 	MALOG(Warning, TEXT("curGameMode = %d"), curGameMode);
 }
+#pragma endregion
+
+#pragma region LevelSequence
+
+void AMATitlePlayerController::PlayLevelSequence()
+{
+	FMovieSceneSequencePlaybackSettings PlaybackSettings;
+	ULevelSequencePlayer * LevelSequencePlayer = ULevelSequencePlayer::CreateLevelSequencePlayer(
+		GetWorld(),
+		SequenceAsset,
+		PlaybackSettings,
+		SequenceActor
+	);
+	// 시네머신 시퀀스가 끝나면 실행해야할 함수를 이벤트 할당 하였다.
+	//LevelSequencePlayer->OnFinished.AddDynamic(this, &AStartMapCameraPawn::CharacterSelectCamera);
+
+	LevelSequencePlayer->Play();
+}
+
 #pragma endregion
